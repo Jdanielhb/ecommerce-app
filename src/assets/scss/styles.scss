@@ -1,0 +1,703 @@
+@import 'variables';
+@import 'mixins';
+@import 'base';
+
+.navbar {
+    background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+    padding: 1rem 2rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: $shadow-md;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+
+    &-brand h2 {
+        color: $light-color;
+        margin: 0;
+    }
+
+    &-links {
+        display: flex;
+        gap: 1.5rem;
+    }
+
+    a {
+        color: $light-color;
+        text-decoration: none;
+        font-weight: 600;
+        padding: 0.5rem 1rem;
+        border-radius: $border-radius-md;
+        transition: $transition-fast;
+        position: relative;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        &.active {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: $accent-color;
+            transition: $transition-fast;
+        }
+
+        &:hover::after {
+            width: 100%;
+            left: 0;
+        }
+    }
+
+    .cart-count {
+        background-color: $accent-color;
+        color: $dark-color;
+        border-radius: 50%;
+        padding: 0.2rem 0.5rem;
+        font-size: 0.8rem;
+        margin-left: 0.3rem;
+        animation: fadeIn 0.3s ease;
+    }
+}
+
+// Hero section
+.hero {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+    background-size: cover;
+    background-position: center;
+    color: $light-color;
+    padding: 5rem 2rem;
+    text-align: center;
+    border-radius: $border-radius-lg;
+    margin-bottom: 3rem;
+
+    h1 {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+    }
+
+    .shop-now-button {
+        background: $accent-color;
+        color: $light-color;
+        padding: 0.8rem 1.5rem;
+        border-radius: $border-radius-md;
+        font-weight: 600;
+        transition: $transition-fast;
+        display: inline-block;
+
+        &:hover {
+            transform: translateY(-2px);
+            box-shadow: $shadow-sm;
+        }
+    }
+}
+
+// Productos
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    padding: 1rem 0;
+}
+
+.productos-destacados{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.product-card {
+    background: white;
+    border-radius: $border-radius-lg;
+    overflow: hidden;
+    box-shadow: $shadow-sm;
+    transition: $transition-medium;
+    @include hover-effect;
+
+    &-image {
+        width: 100%;
+        height: 200px;
+        object-fit: contain;
+        padding: 1rem;
+        background: #fff;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    &-content {
+        padding: 1.5rem;
+
+        h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.5rem;
+            @include truncate-text(2);
+            color: $dark-color;
+        }
+
+        .price {
+            color: $primary-color;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart,
+        .view-detail {
+            display: inline-block;
+            background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: $border-radius-md;
+            text-decoration: none;
+            font-weight: 600;
+            text-align: center;
+            width: 100%;
+            margin-top: 0.5rem;
+            @include button-effect;
+        }
+
+        .view-detail {
+            background: $light-gray;
+            color: $dark-color;
+            margin-top: 0.5rem;
+        }
+    }
+}
+
+// Detalle de producto
+.product-detail {
+    display: flex;
+    gap: 3rem;
+    margin-top: 2rem;
+    background: white;
+    border-radius: $border-radius-lg;
+    padding: 2rem;
+    box-shadow: $shadow-sm;
+    animation: fadeIn 0.5s ease;
+
+    @include responsive($breakpoint-md) {
+        flex-direction: column;
+    }
+
+    &-image {
+        flex: 1;
+        max-width: 500px;
+        max-height: 500px;
+        object-fit: contain;
+        border-radius: $border-radius-md;
+        background: #fff;
+        padding: 1rem;
+        box-shadow: $shadow-sm;
+
+        @include responsive($breakpoint-md) {
+            max-width: 100%;
+        }
+    }
+
+    &-info {
+        flex: 1;
+
+        h2 {
+            color: $dark-color;
+            margin-bottom: 1rem;
+            font-size: 1.8rem;
+        }
+
+        .category {
+            display: inline-block;
+            background-color: $accent-color;
+            color: $dark-color;
+            padding: 0.3rem 0.8rem;
+            border-radius: $border-radius-sm;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .description {
+            color: lighten($dark-color, 20%);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .price {
+            color: $primary-color;
+            font-weight: bold;
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        .add-to-cart,
+        .back-to-products {
+            display: inline-block;
+            background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+            color: white;
+            border: none;
+            padding: 0.8rem 1.5rem;
+            border-radius: $border-radius-md;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            @include button-effect;
+            width: 100%;
+            max-width: 300px;
+            margin-top: 1rem;
+            text-align: center;
+
+            &:disabled {
+                background: #ccc;
+                cursor: not-allowed;
+            }
+        }
+
+        .back-to-products {
+            background: $light-gray;
+            color: $dark-color;
+            margin-left: 1rem;
+        }
+    }
+}
+
+// Carrito
+.cart {
+    background: white;
+    border-radius: $border-radius-lg;
+    padding: 2rem;
+    box-shadow: $shadow-sm;
+    animation: fadeIn 0.5s ease;
+
+    h2 {
+        color: $dark-color;
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+        padding-bottom: 0.5rem;
+    }
+
+    &-empty {
+        text-align: center;
+        padding: 2rem;
+        color: lighten($dark-color, 40%);
+    }
+
+    .continue-shopping {
+        display: inline-block;
+        margin-top: 1rem;
+        color: $primary-color;
+        font-weight: 600;
+        border-bottom: #000000;
+    }
+
+    &-item {
+        display: flex;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1.5rem 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+        @include responsive($breakpoint-sm) {
+            flex-direction: column;
+            align-items: flex-start;
+        }
+
+        &-image {
+            width: 80px;
+            height: 80px;
+            object-fit: contain;
+            border-radius: $border-radius-sm;
+            background: #fff;
+            padding: 0.5rem;
+            box-shadow: $shadow-sm;
+        }
+
+        &-info {
+            flex: 1;
+
+            h4 {
+                color: $dark-color;
+                margin-bottom: 0.3rem;
+            }
+
+            .price {
+                color: $primary-color;
+                font-weight: bold;
+            }
+
+            .quantity {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                margin-top: 0.5rem;
+
+                button {
+                    background: $light-color;
+                    border: 1px solid #ddd;
+                    width: 25px;
+                    height: 25px;
+                    border-radius: 50%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    cursor: pointer;
+                    transition: $transition-fast;
+
+                    &:hover {
+                        background: #eee;
+                    }
+                }
+            }
+        }
+
+        .remove-item {
+            background: $danger-color;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: $border-radius-sm;
+            cursor: pointer;
+            @include button-effect;
+
+            @include responsive($breakpoint-sm) {
+                width: 100%;
+            }
+        }
+    }
+
+    &-total {
+        text-align: right;
+        margin-top: 2rem;
+        padding-top: 1rem;
+        border-top: 1px solid rgba(0, 0, 0, 0.1);
+
+        h3 {
+            font-size: 1.5rem;
+            color: $dark-color;
+
+            span {
+                color: $primary-color;
+                font-weight: bold;
+            }
+        }
+    }
+
+    &-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: 1rem;
+        margin-top: 2rem;
+
+        @include responsive($breakpoint-sm) {
+            flex-direction: column;
+        }
+
+        .danger-button {
+            background: $danger-color;
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: $border-radius-md;
+            font-weight: 600;
+            @include button-effect;
+        }
+
+        .checkout-button {
+            background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: $border-radius-md;
+            font-weight: 600;
+            @include button-effect;
+        }
+    }
+}
+
+// Login
+.login-page {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow-sm;
+
+    h1 {
+        text-align: center;
+        margin-bottom: 2rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: $border-radius-md;
+            font-size: 1rem;
+
+            &:focus {
+                outline: none;
+                border-color: $primary-color;
+            }
+        }
+    }
+
+    button {
+        width: 100%;
+        padding: 0.8rem;
+        background: linear-gradient(135deg, $primary-color 0%, $secondary-color 100%);
+        color: white;
+        border: none;
+        border-radius: $border-radius-md;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        @include button-effect;
+
+        &:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+    }
+}
+
+// Loading
+.loading {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+
+    &-spinner {
+        width: 50px;
+        height: 50px;
+        border: 5px solid rgba($primary-color, 0.3);
+        border-radius: 50%;
+        border-top-color: $primary-color;
+        animation: spin 1s ease-in-out infinite;
+    }
+}
+
+// Error message
+.error-message {
+    background: rgba($danger-color, 0.1);
+    color: $danger-color;
+    padding: 1rem;
+    border-radius: $border-radius-md;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-left: 4px solid $danger-color;
+
+    svg {
+        flex-shrink: 0;
+    }
+}
+
+// Estilos para mensajes de usuario
+.user-greeting {
+    color: $light-color;
+    margin-right: 1rem;
+    font-weight: 600;
+}
+
+.logout-button {
+    background: none;
+    border: none;
+    color: $light-color;
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: $border-radius-md;
+    transition: $transition-fast;
+
+    &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+    }
+}
+
+// Mensajes de error de stock
+.stock-error {
+    color: $danger-color;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+}
+
+.stock {
+    font-size: 0.9rem;
+    color: $gray-color;
+    margin-bottom: 0.5rem;
+}
+
+/* Estilos para el login */
+.login-page {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background: white;
+    border-radius: $border-radius-lg;
+    box-shadow: $shadow-sm;
+
+    .login-hints {
+        margin-top: 1.5rem;
+        padding-top: 1rem;
+        border-top: 1px solid $light-gray;
+        font-size: 0.9rem;
+        color: $gray-color;
+
+        ul {
+            padding-left: 1.5rem;
+            margin-top: 0.5rem;
+        }
+
+        li {
+            margin-bottom: 0.3rem;
+        }
+    }
+}
+
+/* Estilos para el usuario en navbar */
+.user-section {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-greeting {
+    color: $light-color;
+    font-weight: 600;
+}
+
+/* Estilos para el carrito */
+.cart-item {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+    &-image {
+        width: 80px;
+        height: 80px;
+        object-fit: contain;
+        border-radius: $border-radius-sm;
+        background: #fff;
+        padding: 0.5rem;
+        box-shadow: $shadow-sm;
+    }
+
+    &-info {
+        flex: 1;
+
+        h4 {
+            color: $dark-color;
+            margin-bottom: 0.3rem;
+        }
+
+        .price {
+            color: $primary-color;
+            font-weight: bold;
+        }
+    }
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+
+    .quantity-button {
+        background: $light-color;
+        border: 1px solid #ddd;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: $transition-fast;
+
+        &:hover:not(:disabled) {
+            background: #eee;
+        }
+
+        &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+    }
+
+    .quantity {
+        min-width: 20px;
+        text-align: center;
+    }
+
+    .stock-info {
+        font-size: 0.8rem;
+        color: $gray-color;
+        margin-left: 0.5rem;
+    }
+}
+
+.stock-error-message {
+    color: $danger-color;
+    font-size: 0.8rem;
+    margin-top: 0.5rem;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.remove-item {
+    background: $danger-color;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: $border-radius-sm;
+    cursor: pointer;
+    transition: $transition-fast;
+
+    &:hover {
+        background: darken($danger-color, 10%);
+    }
+}

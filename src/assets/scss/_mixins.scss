@@ -1,0 +1,38 @@
+@mixin hover-effect {
+    &:hover {
+        transform: translateY(-3px);
+        box-shadow: $shadow-md;
+    }
+}
+
+@mixin button-effect {
+    transition: $transition-fast;
+
+    &:hover {
+        transform: translateY(-2px);
+        box-shadow: $shadow-sm;
+    }
+
+    &:active {
+        transform: translateY(0);
+    }
+}
+
+@mixin truncate-text($lines) {
+    display: -webkit-box;
+    -webkit-line-clamp: $lines;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin responsive($breakpoint) {
+    @media (max-width: $breakpoint) {
+        @content;
+    }
+}
