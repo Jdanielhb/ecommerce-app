@@ -8,6 +8,7 @@ import Products from './pages/Products';
 import ProductDetail from './components/ProductDetail';
 import Cart from './components/Cart';
 import Login from './pages/Login';
+import Checkout from './components/Checkout';
 import './assets/scss/styles.scss';
 
 const App = () => {
@@ -23,9 +24,10 @@ const App = () => {
               <Route path="/products/:id" element={<ProductDetail />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/login" element={<Login />} />
+              <Route path="/checkout" element={<Checkout />} />
             </Routes>
           </main>
-          <Footer /> 
+          <Footer />
         </div>
       </CartProvider>
     </AuthProvider>
